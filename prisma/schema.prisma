@@ -10,7 +10,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Todo {
+model User {
   id Int @id
-  title String
+  name    String
+  todoItems Todo[]
+}
+
+model Todo {
+  id       Int @id
+  title    String
+  authorId Int
+  author   User @relation(fields: [authorId], references: [id])
 }
