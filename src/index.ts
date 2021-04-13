@@ -1,5 +1,8 @@
 import express from 'express'
 import { ApolloServer, gql } from 'apollo-server-express'
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 const todoes = [
     {
@@ -35,7 +38,11 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
         todo: (_: any, { id }: { id: number}) => {
-            return todoes.find(todo => todo.id === id)
+            return prisma.todo.findMany({
+                where: {
+                    id: id
+                }
+            })
         },
         todoes: (_: any, { title }: { title: string }) => {
             return todoes.filter(todo => todo.title.includes(title))
