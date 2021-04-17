@@ -1,9 +1,9 @@
+import { Context } from './context';
 import { SchemaDirectiveVisitor } from "@graphql-tools/utils"
 import { GraphQLField, defaultFieldResolver } from "graphql"
-import { Context } from "../../context"
+
 
 export class AdminOnlyDirective extends SchemaDirectiveVisitor {
-
     public visitFieldDefinition(field: GraphQLField<never, Context>) {
         const { resolve = defaultFieldResolver } = field
         field.resolve = async function(...args) {
