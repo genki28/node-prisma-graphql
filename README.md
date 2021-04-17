@@ -1,4 +1,4 @@
-#node-prisma-graphql
+#graphqlとmysql
 
 ## 以下のコマンドでmigrateができる
 npx prisma db push --preview-feature
