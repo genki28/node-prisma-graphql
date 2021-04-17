@@ -10,15 +10,49 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// model User {
-//   id Int @id
-//   name    String
-//   todoItems Todo[]
-// }
-
 model Todo {
   id       Int @id
   title    String
-  // authorId Int
-  // author   User @relation(fields: [authorId], references: [id])
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  content   String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  channel   Channel  @relation(fields: [channelId], references: [id])
+  channelId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Channel {
+  id          Int     @id @default(autoincrement())
+  title       String  @db.VarChar(255)
+  description String? @db.VarChar(255)
+  posts       Post[]
+  members     User[]  @relation("ChannelUser")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
+  name     String
+  channels Channel[] @relation("ChannelUser")
+  posts    Post[]
+  role     Role      @default(USER)
+}
+
+generator gen {
+  provider = "prisma-client-js"
+}
+
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output   = "../src/generated/typegraphql-prisma"
 }

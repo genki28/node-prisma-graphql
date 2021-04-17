@@ -2,7 +2,6 @@ version: '3'
 
 services:
   # MySQL
-  # MySQL
   db:
     image: mysql:8
     container_name: mysql_host

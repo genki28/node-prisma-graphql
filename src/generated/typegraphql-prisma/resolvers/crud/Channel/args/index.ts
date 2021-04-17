@@ -1,0 +1,12 @@
+export { AggregateChannelArgs } from "./AggregateChannelArgs";
+export { CreateChannelArgs } from "./CreateChannelArgs";
+export { CreateManyChannelArgs } from "./CreateManyChannelArgs";
+export { DeleteChannelArgs } from "./DeleteChannelArgs";
+export { DeleteManyChannelArgs } from "./DeleteManyChannelArgs";
+export { FindFirstChannelArgs } from "./FindFirstChannelArgs";
+export { FindManyChannelArgs } from "./FindManyChannelArgs";
+export { FindUniqueChannelArgs } from "./FindUniqueChannelArgs";
+export { GroupByChannelArgs } from "./GroupByChannelArgs";
+export { UpdateChannelArgs } from "./UpdateChannelArgs";
+export { UpdateManyChannelArgs } from "./UpdateManyChannelArgs";
+export { UpsertChannelArgs } from "./UpsertChannelArgs";
