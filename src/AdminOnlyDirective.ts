@@ -4,15 +4,17 @@ import { GraphQLField, defaultFieldResolver } from "graphql"
 
 
 export class AdminOnlyDirective extends SchemaDirectiveVisitor {
-    public visitFieldDefinition(field: GraphQLField<never, Context>) {
-        const { resolve = defaultFieldResolver } = field
-        field.resolve = async function(...args) {
-            const [, , ctx] = args
-            // 実際に使う場合には、JWTなどできちんと判断できるようにする
-            if (ctx.request.header("role") === "ADMIN") {
-                return resolve.apply(this, args)
-            }
-            throw new Error("not authorized")
-        }
-    }
+
+  public visitFieldDefinition(field: GraphQLField<never, Context>) {
+    const { resolve = defaultFieldResolver } = field;
+    field.resolve = async function(...args) {
+      const [, , ctx] = args;
+      // 実際にはJWTなどできちんと判断するようにする
+      if (ctx.request.header("role") === "ADMIN") {
+        return resolve.apply(this, args);
+      }
+      throw new Error("not authorized");
+    };
+  }
+
 }
